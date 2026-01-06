@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>5. According to Thy Lovingkindness | song-chords</title>
+
+<style>
+html, body {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: monospace;
+  font-size: 16px;
+  line-height: 1.6;
+  padding: 10px;
+}
+
+.chord {
+  color: #c00000;
+  font-weight: bold;
+}
+
+.song-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.key-line {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 6px 14px;
+  margin-right: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.footer-nav {
+  margin-top: 25px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.footer-nav a {
+  color: #000;
+  text-decoration: underline;
+  margin: 0 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="song-title">5. According to Thy Lovingkindness</div>
+
+<div class="key-line">
+  Original Key: <strong>F</strong>
+  <span id="transposeKey"></span>
+</div>
+
+<button onclick="transpose(-1)">–</button>
+<button onclick="transpose(1)">+</button>
+
+<pre id="song">
+[F]According to Thy loving kindness [Bb]Father,
+[C]Have mercy on my sinful, wretched [F]soul.
+
+[F]Make me to know once more Thy joy and [Bb]gladness,
+[C]Blot out my sin, O cleanse and make me [F]whole.
+
+[F]I humbly now acknowledge my trans[Bb]gression,
+[F]Against Thee only, Father is my [C]sin;
+
+[F]Restore to me the joy of Thy salva[Bb]tion,
+[C]O purify my life, without within. [F]
+</pre>
+
+<div class="footer-nav">
+  <a href="https://sites.google.com/view/song-chords/choruses">Back to Choruses</a> |
+  <a href="https://sites.google.com/view/song-chords">Home</a>
+</div>
+
+<script>
+const NOTES = ["C","Db","D","Eb","E","F","Gb","G","Ab","A","Bb","B"];
+const ORIGINAL_KEY = "F";
+const originalIndex = NOTES.indexOf(ORIGINAL_KEY);
+const originalSong = document.getElementById("song").innerText;
+let transposeSteps = 0;
+
+function colorize(text) {
+  return text.replace(/\[([^\]]+)\]/g, '<span class="chord">[$1]</span>');
+}
+
+function render(songText) {
+  document.getElementById("song").innerHTML = colorize(songText);
+}
+
+render(originalSong);
+
+function transposeChord(chord, steps) {
+  let parts = chord.split("/");
+  let root = parts[0];
+  let bass = parts[1] || null;
+
+  let match = root.match(/^([A-G])(b|#)?(.*)$/);
+  if (!match) return chord;
+
+  let note = match[1] + (match[2] || "");
+  let suffix = match[3] || "";
+
+  let index = NOTES.indexOf(note);
+  if (index === -1) return chord;
+
+  let newNote = NOTES[(index + steps + 12) % 12];
+  let newChord = newNote + suffix;
+
+  if (bass) {
+    let bassIndex = NOTES.indexOf(bass);
+    if (bassIndex !== -1) {
+      let newBass = NOTES[(bassIndex + steps + 12) % 12];
+      newChord += "/" + newBass;
+    }
+  }
+
+  return newChord;
+}
+
+function transpose(step) {
+  transposeSteps += step;
+
+  let song = originalSong.replace(/\[([^\]]+)\]/g, (m, chord) => {
+    return "[" + transposeChord(chord, transposeSteps) + "]";
+  });
+
+  let currentIndex = (originalIndex + transposeSteps + 12) % 12;
+  let currentKey = NOTES[currentIndex];
+
+  document.getElementById("transposeKey").innerText =
+    transposeSteps === 0 ? "" : "    Transpose Key: " + currentKey;
+
+  render(song);
+}
+</script>
+
+</body>
+</html>
