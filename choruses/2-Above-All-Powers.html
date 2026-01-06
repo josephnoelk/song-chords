@@ -1,24 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>2. Above All Powers | Sing Unto the Lord</title>
+
+<!-- 🔑 CRITICAL FOR MOBILE -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>2. Above All Powers | song-chords</title>
 
 <style>
+/* Ensure proper mobile width */
+html, body {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Base layout */
 body {
   font-family: monospace;
   font-size: 16px;
   line-height: 1.6;
   padding: 10px;
-
 }
 
+/* Chords */
 .chord {
   color: #c00000;
   font-weight: bold;
 }
 
+/* Headings */
 .song-title {
   font-size: 20px;
   font-weight: bold;
@@ -29,19 +42,24 @@ body {
   margin-bottom: 10px;
 }
 
+/* Buttons */
 button {
-  padding: 5px 12px;
+  padding: 6px 14px;
   margin-right: 6px;
   font-size: 14px;
   cursor: pointer;
 }
 
-/* 🔒 LOCKED MOBILE FONT SIZE */
+/* Song text — mobile-safe */
 pre {
   white-space: pre-wrap;
-  font-size: 13px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  font-size: 14px;
+  margin-top: 10px;
 }
 
+/* Footer */
 .footer-nav {
   margin-top: 25px;
   text-align: center;
@@ -69,28 +87,28 @@ pre {
 <button onclick="transpose(1)">+</button>
 
 <pre id="song">
-[Bb]Above all [Eb]powers, above all [F]kings  
-[Bb]Above all [Eb]nature and all cre[F]ated [Bb]things  
+[Bb]Above all [Eb]powers, above all [F]kings
+[Bb]Above all [Eb]nature and all cre[F]ated [Bb]things
 
-[F/A]Above all [Gm]wisdom and all the [F]ways of [Eb]man [Bb/D]  
-[Cm]You were [Bb]here before the [F/A][D]world began  
+[F/A]Above all [Gm]wisdom and all the [F]ways of [Eb]man [Bb/D]
+[Cm]You were [Bb]here before the [F/A][D]world began
 
-[Bb]Cruci[Cm]fied laid be[F/A]hind a [Bb]stone  
-[Bb]You lived to [Cm]die, rejected and a[F]lone [Bb]  
+[Bb]Cruci[Cm]fied laid be[F/A]hind a [Bb]stone
+[Bb]You lived to [Cm]die, rejected and a[F]lone [Bb]
 
-[F/A]Like a [Gm]rose trampled on the [Gm/F]gro[Eb]und [Bb/D]  
-[Cm]You took the [Bb/D]fall… and [Eb][F]thought of [Bb]me… Above all  
+[F/A]Like a [Gm]rose trampled on the [Gm/F]gro[Eb]und [Bb/D]
+[Cm]You took the [Bb/D]fall… and [Eb][F]thought of [Bb]me… Above all
 
-[Bb]Above all [Eb]kingdoms, above all [F]thrones  
-[Bb]Above all [Eb]wonders the world had e[F]ver [Bb]known  
+[Bb]Above all [Eb]kingdoms, above all [F]thrones
+[Bb]Above all [Eb]wonders the world had e[F]ver [Bb]known
 
-[F/A]Above all [Gm]wealth and treasures of the [F]earth [Eb] [Bb/D]  
-[Cm]There’s no way to [Bb]measure what [F/A][D]you’re worth  
+[F/A]Above all [Gm]wealth and treasures of the [F]earth [Eb] [Bb/D]
+[Cm]There’s no way to [Bb]measure what [F/A][D]you’re worth
 
-[Bb]Cruci[Cm]fied laid be[F/A]hind a [Bb]stone  
-[Bb]You lived to [Cm]die, rejected and a[F]lone [Bb]  
+[Bb]Cruci[Cm]fied laid be[F/A]hind a [Bb]stone
+[Bb]You lived to [Cm]die, rejected and a[F]lone [Bb]
 
-[F/A]Like a [Gm]rose trampled on the [Gm/F]gro[Eb]und [Bb/D]  
+[F/A]Like a [Gm]rose trampled on the [Gm/F]gro[Eb]und [Bb/D]
 [Cm]You took the [Bb/D]fall… and [Eb][F]thought of [Bb]me… Above all
 </pre>
 
@@ -100,22 +118,33 @@ pre {
 </div>
 
 <script>
+/* Flat-friendly chromatic scale */
 const NOTES = ["C","Db","D","Eb","E","F","Gb","G","Ab","A","Bb","B"];
+
+/* Original key */
 const ORIGINAL_KEY = "Bb";
 const originalIndex = NOTES.indexOf(ORIGINAL_KEY);
+
+/* Preserve original song */
 const originalSong = document.getElementById("song").innerText;
+
+/* Transpose offset */
 let transposeSteps = 0;
 
+/* Colorize chords */
 function colorize(text) {
   return text.replace(/\[([^\]]+)\]/g, '<span class="chord">[$1]</span>');
 }
 
+/* Render */
 function render(songText) {
   document.getElementById("song").innerHTML = colorize(songText);
 }
 
+/* Initial render */
 render(originalSong);
 
+/* Transpose a chord correctly */
 function transposeChord(chord, steps) {
   let parts = chord.split("/");
   let root = parts[0];
@@ -144,6 +173,7 @@ function transposeChord(chord, steps) {
   return newChord;
 }
 
+/* Main transpose */
 function transpose(step) {
   transposeSteps += step;
 
