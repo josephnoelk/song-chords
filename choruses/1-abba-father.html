@@ -1,25 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>1. Abba Father | Sing Unto the Lord</title>
+
+<!-- 🔑 CRITICAL FOR MOBILE -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>1. Abba Father | song-chords</title>
 
 <style>
-body {
-  font-family: monospace;
-  line-height: 1.6;
-  padding: 10px;
-
-  /* OPTIONAL: prevent inner scrolling */
-  overflow: hidden;
+/* Ensure proper mobile width */
+html, body {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
+/* Base layout */
+body {
+  font-family: monospace;
+  font-size: 16px;
+  line-height: 1.6;
+  padding: 10px;
+}
+
+/* Chords */
 .chord {
   color: #c00000;
   font-weight: bold;
 }
 
+/* Headings */
 .song-title {
   font-size: 20px;
   font-weight: bold;
@@ -30,19 +42,24 @@ body {
   margin-bottom: 10px;
 }
 
+/* Buttons */
 button {
-  padding: 5px 12px;
+  padding: 6px 14px;
   margin-right: 6px;
   font-size: 14px;
   cursor: pointer;
 }
 
-/* Locked mobile-friendly size */
+/* Song text — mobile-safe */
 pre {
   white-space: pre-wrap;
-  font-size: 13px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  font-size: 14px;
+  margin-top: 10px;
 }
 
+/* Footer */
 .footer-nav {
   margin-top: 25px;
   text-align: center;
@@ -89,22 +106,33 @@ pre {
 </div>
 
 <script>
+/* Flat-friendly chromatic scale */
 const NOTES = ["C","Db","D","Eb","E","F","Gb","G","Ab","A","Bb","B"];
+
+/* Original key */
 const ORIGINAL_KEY = "Bb";
 const originalIndex = NOTES.indexOf(ORIGINAL_KEY);
+
+/* Preserve original song */
 const originalSong = document.getElementById("song").innerText;
+
+/* Transpose offset */
 let transposeSteps = 0;
 
+/* Colorize chords */
 function colorize(text) {
   return text.replace(/\[([^\]]+)\]/g, '<span class="chord">[$1]</span>');
 }
 
+/* Render */
 function render(songText) {
   document.getElementById("song").innerHTML = colorize(songText);
 }
 
+/* Initial render */
 render(originalSong);
 
+/* Transpose a chord correctly */
 function transposeChord(chord, steps) {
   let parts = chord.split("/");
   let root = parts[0];
@@ -133,6 +161,7 @@ function transposeChord(chord, steps) {
   return newChord;
 }
 
+/* Main transpose */
 function transpose(step) {
   transposeSteps += step;
 
