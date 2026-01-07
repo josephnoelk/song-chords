@@ -2,14 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-
-<!-- 🔑 CRITICAL FOR MOBILE -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>2. Above All Powers | song-chords</title>
 
 <style>
-/* Ensure proper mobile width */
 html, body {
   width: 100%;
   max-width: 100%;
@@ -17,21 +14,20 @@ html, body {
   padding: 0;
 }
 
-/* Base layout */
 body {
+  background: #ffffff;
+  color: #111111;
   font-family: monospace;
   font-size: 16px;
   line-height: 1.6;
   padding: 10px;
 }
 
-/* Chords */
 .chord {
   color: #c00000;
   font-weight: bold;
 }
 
-/* Headings */
 .song-title {
   font-size: 20px;
   font-weight: bold;
@@ -42,7 +38,6 @@ body {
   margin-bottom: 10px;
 }
 
-/* Buttons */
 button {
   padding: 6px 14px;
   margin-right: 6px;
@@ -50,7 +45,6 @@ button {
   cursor: pointer;
 }
 
-/* Song text — mobile-safe */
 pre {
   white-space: pre-wrap;
   word-wrap: break-word;
@@ -59,7 +53,6 @@ pre {
   margin-top: 10px;
 }
 
-/* Footer */
 .footer-nav {
   margin-top: 25px;
   text-align: center;
@@ -87,80 +80,29 @@ pre {
 <button onclick="transpose(1)">+</button>
 
 <pre id="song">
-[Bb]      [Eb]   
-Above all powers,
-[F]       [Bb]
-above all kings
+[Bb]Above all [Eb]powers, above all [F]kings,
+[Bb]Above all [Eb]nature and all created [F][Bb]things.
 
-          [Eb]        
-Above all nature
-    [F]         [Bb]
-and all created things
+[F/A]Above all [Gm]wisdom and all the [F]ways of [Eb][Bb/D]man,
+[Cm]You were [Bb]here before the [F/A][D]world began.
 
-[F/A]     [Gm]     
-Above all wisdom
-    [F]             [Eb] [Bb/D]
-and all the ways of man
-[Cm]             
-You were here
-[Bb]             [F/A] [D]
-before the world began
+[Bb][Cm][F/A]Crucified laid behind a [Bb]stone,
+[Bb]You lived to [Cm]die, rejected and a[F][Bb]lone.
 
-[Bb] [Cm] [F/A]  
-Crucified laid
-         [Bb]
-behind a stone
-[Bb]         [Cm]   
-You lived to die,
-[F]           [Bb]
-rejected and alone
+[F/A]Like a [Gm]rose trampled on the [Gm/F][Eb][Bb/D]ground,
+[Cm]You took the [Bb/D]fall and [Eb][F]thought of [Bb]me… Above all.
 
-[F/A] [Gm]   
-Like a rose
-[Gm/F]          [Eb] [Bb/D]
-trampled on the ground
-             [Cm] [Bb/D] 
-You took the fall
-              [Eb] [F]     [Bb]
-and thought of me… Above all
+[Bb]Above all [Eb]kingdoms, above all [F]thrones,
+[Bb]Above all [Eb]wonders the world had ever [F][Bb]known.
 
-[Bb]      [Eb]   
-Above all kingdoms,
-[F]       [Bb]
-above all thrones
+[F/A]Above all [Gm]wealth and treasures of the [F][Eb][Bb/D]earth,
+[Cm]There’s no way to [Bb]measure what [F/A][D]you’re worth.
 
-          [Eb]        
-Above all wonders
-    [F]           [Bb]
-the world had ever known
+[Bb][Cm][F/A]Crucified laid behind a [Bb]stone,
+[Bb]You lived to [Cm]die, rejected and a[F][Bb]lone.
 
-[F/A]     [Gm]     
-Above all wealth
-    [F]             [Eb] [Bb/D]
-and treasures of the earth
-[Cm]       
-There’s no way
-[[Bb]             [F/A] [D]
-to measure what you’re worth
-
-[Bb] [Cm] [F/A]  
-Crucified laid
-         [Bb]
-behind a stone
-[Bb]         [Cm]   
-You lived to die,
-[F]           [Bb]
-rejected and alone
-
-[F/A] [Gm]   
-Like a rose
-[Gm/F]          [Eb] [Bb/D]
-trampled on the ground
-             [Cm] [Bb/D]
-You took the fall
-              [Eb] [F]     [Bb]
-and thought of me… Above all
-
+[F/A]Like a [Gm]rose trampled on the [Gm/F][Eb][Bb/D]ground,
+[Cm]You took the [Bb/D]fall and [Eb][F]thought of [Bb]me… Above all.
 </pre>
 
 <div class="footer-nav">
@@ -169,33 +111,24 @@ and thought of me… Above all
 </div>
 
 <script>
-/* Flat-friendly chromatic scale */
-const NOTES = ["C","Db","D","Eb","E","F","Gb","G","Ab","A","Bb","B"];
+/* Locked chromatic order */
+const NOTES = ["C","C#","D","Eb","E","F","F#","G","Ab","A","Bb","B"];
 
-/* Original key */
 const ORIGINAL_KEY = "Bb";
 const originalIndex = NOTES.indexOf(ORIGINAL_KEY);
-
-/* Preserve original song */
 const originalSong = document.getElementById("song").innerText;
-
-/* Transpose offset */
 let transposeSteps = 0;
 
-/* Colorize chords */
 function colorize(text) {
   return text.replace(/\[([^\]]+)\]/g, '<span class="chord">[$1]</span>');
 }
 
-/* Render */
 function render(songText) {
   document.getElementById("song").innerHTML = colorize(songText);
 }
 
-/* Initial render */
 render(originalSong);
 
-/* Transpose a chord correctly */
 function transposeChord(chord, steps) {
   let parts = chord.split("/");
   let root = parts[0];
@@ -224,7 +157,6 @@ function transposeChord(chord, steps) {
   return newChord;
 }
 
-/* Main transpose */
 function transpose(step) {
   transposeSteps += step;
 
@@ -236,7 +168,7 @@ function transpose(step) {
   let currentKey = NOTES[currentIndex];
 
   document.getElementById("transposeKey").innerText =
-    transposeSteps === 0 ? "" : "    Transpose Key: " + currentKey;
+    transposeSteps === 0 ? "" : "Transpose Key: " + currentKey;
 
   render(song);
 }
