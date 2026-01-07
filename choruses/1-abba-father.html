@@ -15,6 +15,8 @@ html, body {
 }
 
 body {
+  background: #ffffff;
+  color: #111111;
   font-family: monospace;
   font-size: 16px;
   line-height: 1.6;
@@ -78,25 +80,17 @@ pre {
 <button onclick="transpose(1)">+</button>
 
 <pre id="song">
-[Bb] [Cm]   [F]   [Bb]
-Abba Father let me be
-[Eb]      [F]   [Bb]
-Yours and yours alone
+[Bb]Abba [Cm]Father [F]let me [Bb]be
+[Eb]Yours and [F]yours a[Bb]lone
 
-[Bb]   [Cm]     [F] [Bb]
-May my will for ever be
-[Eb] [F]       [Bb]
-Ever more your own
+[Bb]May my [Cm]will for [F]ever [Bb]be
+[Eb]Ever [F]more your [Bb]own
 
-[D]   [Gm]   [D]        [Gm]  
-Never let my heart grow cold  
-[Eb]  [Cm]  [F4] [F]
-Never let me go
+[D]Never let my [Gm]heart grow [D]cold
+[Gm]Never let me [Eb]go [Cm][F4][F]
 
-[Bb] [Cm]    [F]   [Bb]
-Abba Father, let me be
-[Eb]      [F]   [Bb]
-Yours and yours alone.
+[Bb]Abba [Cm]Father, [F]let me [Bb]be
+[Eb]Yours and [F]yours a[Bb]lone
 </pre>
 
 <div class="footer-nav">
@@ -162,7 +156,7 @@ function transpose(step) {
   let currentKey = NOTES[currentIndex];
 
   document.getElementById("transposeKey").innerText =
-    transposeSteps === 0 ? "" : "    Transpose Key: " + currentKey;
+    transposeSteps === 0 ? "" : "Transpose Key: " + currentKey;
 
   render(song);
 }
