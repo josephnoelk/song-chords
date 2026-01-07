@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Abba Father | song-chords</title>
+<title>Song Title | song-chords</title>
 
 <style>
 body {
@@ -28,16 +28,29 @@ pre {
 
 button {
   margin-right: 6px;
+  padding: 5px 12px;
+}
+
+.footer-nav {
+  margin-top: 25px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.footer-nav a {
+  color: #000;
+  text-decoration: underline;
+  margin: 0 10px;
 }
 </style>
 </head>
 
 <body>
 
-<h2>1. Abba Father</h2>
+<h2>Song Number. Song Title</h2>
 
 <div>
-  Original Key: <b>Bb</b><br>
+  Original Key: <b>KEY</b><br>
   <span id="transposeKey"></span>
 </div>
 
@@ -45,24 +58,18 @@ button {
 <button onclick="transpose(1)">+</button>
 
 <pre id="song">
-Bb     Cm     F         Bb
-Abba Father let me be
-Eb             F        Bb
-Yours and yours alone
-
-Bb        Cm       F     Bb
-May my will for ever be
-Eb     F               Bb
-Ever more your own
-  Eb     F               Bb
-Ever more your own
-  Ever more your own
-
+PUT CHORD LINE HERE
+PUT LYRIC LINE HERE
 </pre>
+
+<div class="footer-nav">
+  <a href="../choruses/index.html">Back to Choruses</a> |
+  <a href="https://sites.google.com/view/song-chords">Home</a>
+</div>
 
 <script>
 const NOTES = ["C","C#","D","Eb","E","F","F#","G","Ab","A","Bb","B"];
-const ORIGINAL_KEY = "Bb";
+const ORIGINAL_KEY = "KEY";
 const originalIndex = NOTES.indexOf(ORIGINAL_KEY);
 
 const rawText = document.getElementById("song").innerText;
@@ -75,7 +82,7 @@ function isChord(token) {
 function process(text, steps) {
   return text.split("\n").map(line => {
     const tokens = line.trim().split(/\s+/);
-    const isChordLine = tokens.every(t => isChord(t));
+    const isChordLine = tokens.length && tokens.every(t => isChord(t));
 
     if (!isChordLine) return line;
 
@@ -109,12 +116,9 @@ function process(text, steps) {
 function render() {
   document.getElementById("song").innerHTML = process(rawText, transposeSteps);
 
-  if (transposeSteps === 0) {
-    document.getElementById("transposeKey").innerText = "";
-  } else {
-    document.getElementById("transposeKey").innerText =
-      "Transpose Key: " + NOTES[(originalIndex + transposeSteps + 12) % 12];
-  }
+  document.getElementById("transposeKey").innerText =
+    transposeSteps === 0 ? "" :
+    "Transpose Key: " + NOTES[(originalIndex + transposeSteps + 12) % 12];
 }
 
 function transpose(step) {
