@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Abba Father | song-chords</title>
+
+<style>
+body {
+  background: #ffffff;
+  color: #111;
+  font-family: monospace;
+  font-size: 16px;
+  line-height: 1.6;
+  padding: 10px;
+}
+
+.chord {
+  color: #c00000;
+  font-weight: bold;
+}
+
+pre {
+  white-space: pre-wrap;
+  font-size: 14px;
+}
+
+button {
+  margin-right: 6px;
+}
+</style>
+</head>
+
+<body>
+
+<h2>1. Abba Father</h2>
+
+<div>
+  Original Key: <b>Bb</b><br>
+  <span id="transposeKey"></span>
+</div>
+
+<button onclick="transpose(-1)">–</button>
+<button onclick="transpose(1)">+</button>
+
+<pre id="song">
+Bb     Cm     F         Bb
+Abba Father let me be
+Eb             F        Bb
+Yours and yours alone
+
+Bb        Cm       F     Bb
+May my will for ever be
+Eb     F               Bb
+Ever more your own
+</pre>
+
+<script>
+const NOTES = ["C","C#","D","Eb","E","F","F#","G","Ab","A","Bb","B"];
+const ORIGINAL_KEY = "Bb";
+const originalIndex = NOTES.indexOf(ORIGINAL_KEY);
+
+const rawText = document.getElementById("song").innerText;
+let transposeSteps = 0;
+
+function isChord(token) {
+  return /^[A-G](#|b)?(m|maj|min|dim|aug|sus|add)?\d*(\/[A-G](#|b)?)?$/.test(token);
+}
+
+function process(text, steps) {
+  return text.split("\n").map(line => {
+    const tokens = line.trim().split(/\s+/);
+    const isChordLine = tokens.every(t => isChord(t));
+
+    if (!isChordLine) return line;
+
+    return tokens.map(ch => {
+      let root = ch.split("/")[0];
+      let bass = ch.includes("/") ? ch.split("/")[1] : null;
+
+      let match = root.match(/^([A-G])(b|#)?(.*)$/);
+      if (!match) return ch;
+
+      let note = match[1] + (match[2] || "");
+      let suffix = match[3] || "";
+
+      let idx = NOTES.indexOf(note);
+      if (idx === -1) return ch;
+
+      let newNote = NOTES[(idx + steps + 12) % 12];
+      let out = `<span class="chord">${newNote}${suffix}</span>`;
+
+      if (bass) {
+        let bIdx = NOTES.indexOf(bass);
+        if (bIdx !== -1) {
+          out += "/" + NOTES[(bIdx + steps + 12) % 12];
+        }
+      }
+      return out;
+    }).join("    ");
+  }).join("\n");
+}
+
+function render() {
+  document.getElementById("song").innerHTML = process(rawText, transposeSteps);
+
+  if (transposeSteps === 0) {
+    document.getElementById("transposeKey").innerText = "";
+  } else {
+    document.getElementById("transposeKey").innerText =
+      "Transpose Key: " + NOTES[(originalIndex + transposeSteps + 12) % 12];
+  }
+}
+
+function transpose(step) {
+  transposeSteps += step;
+  render();
+}
+
+render();
+</script>
+
+</body>
+</html>
