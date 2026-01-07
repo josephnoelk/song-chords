@@ -15,6 +15,8 @@ html, body {
 }
 
 body {
+  background: #ffffff;
+  color: #111111;
   font-family: monospace;
   font-size: 16px;
   line-height: 1.6;
@@ -70,7 +72,7 @@ pre {
 <div class="song-title">3. Absolutely Tender</div>
 
 <div class="key-line">
-  Original Key: <strong>Bb</strong>
+  Original Key: <strong>Bb</strong><br>
   <span id="transposeKey"></span>
 </div>
 
@@ -91,7 +93,9 @@ pre {
 </div>
 
 <script>
-const NOTES = ["C","Db","D","Eb","E","F","Gb","G","Ab","A","Bb","B"];
+/* Locked chromatic order */
+const NOTES = ["C","C#","D","Eb","E","F","F#","G","Ab","A","Bb","B"];
+
 const ORIGINAL_KEY = "Bb";
 const originalIndex = NOTES.indexOf(ORIGINAL_KEY);
 const originalSong = document.getElementById("song").innerText;
@@ -146,7 +150,7 @@ function transpose(step) {
   let currentKey = NOTES[currentIndex];
 
   document.getElementById("transposeKey").innerText =
-    transposeSteps === 0 ? "" : "    Transpose Key: " + currentKey;
+    transposeSteps === 0 ? "" : "Transpose Key: " + currentKey;
 
   render(song);
 }
