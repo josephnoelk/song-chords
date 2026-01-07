@@ -2,14 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-
-<!-- 🔑 CRITICAL FOR MOBILE -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>1. Abba Father | song-chords</title>
 
 <style>
-/* Ensure proper mobile width */
 html, body {
   width: 100%;
   max-width: 100%;
@@ -17,7 +14,6 @@ html, body {
   padding: 0;
 }
 
-/* Base layout */
 body {
   font-family: monospace;
   font-size: 16px;
@@ -25,13 +21,11 @@ body {
   padding: 10px;
 }
 
-/* Chords */
 .chord {
   color: #c00000;
   font-weight: bold;
 }
 
-/* Headings */
 .song-title {
   font-size: 20px;
   font-weight: bold;
@@ -42,7 +36,6 @@ body {
   margin-bottom: 10px;
 }
 
-/* Buttons */
 button {
   padding: 6px 14px;
   margin-right: 6px;
@@ -50,7 +43,6 @@ button {
   cursor: pointer;
 }
 
-/* Song text — mobile-safe */
 pre {
   white-space: pre-wrap;
   word-wrap: break-word;
@@ -59,7 +51,6 @@ pre {
   margin-top: 10px;
 }
 
-/* Footer */
 .footer-nav {
   margin-top: 25px;
   text-align: center;
@@ -87,17 +78,23 @@ pre {
 <button onclick="transpose(1)">+</button>
 
 <pre id="song">
-[Bb]Abba [Cm]Father [F]let me [Bb]be
-[Eb]Yours and [F]yours a[Bb]lone
+[Bb] [Cm]   [F]   [Bb]
+Abba Father let me be
+[Eb]      [F]   [Bb]
+Yours and yours alone
 
-[Bb]May my [Cm]will for [F]ever [Bb]be
-[Eb]Ever [F]more your [Bb]own
+[Bb]   [Cm]     [F] [Bb]
+May my will for ever be
+[Eb] [F]       [Bb]
+Ever more your own
 
-[D]Never let my [Gm]heart grow [D]cold
-[Gm]Never let me [Eb]go [Cm][F4][F]
+[D]   [Gm]   [D]        [Gm]  [Eb]  [Cm]  [F4] [F]
+Never let my heart grow cold  Never let me go
 
-[Bb]Abba [Cm]Father, [F]let me [Bb]be
-[Eb]Yours and [F]yours a[Bb]lone
+[Bb] [Cm]    [F]   [Bb]
+Abba Father, let me be
+[Eb]      [F]   [Bb]
+Yours and yours alone.
 </pre>
 
 <div class="footer-nav">
@@ -106,33 +103,24 @@ pre {
 </div>
 
 <script>
-/* Flat-friendly chromatic scale */
-const NOTES = ["C","Db","D","Eb","E","F","Gb","G","Ab","A","Bb","B"];
+/* Locked chromatic order */
+const NOTES = ["C","C#","D","Eb","E","F","F#","G","Ab","A","Bb","B"];
 
-/* Original key */
 const ORIGINAL_KEY = "Bb";
 const originalIndex = NOTES.indexOf(ORIGINAL_KEY);
-
-/* Preserve original song */
 const originalSong = document.getElementById("song").innerText;
-
-/* Transpose offset */
 let transposeSteps = 0;
 
-/* Colorize chords */
 function colorize(text) {
   return text.replace(/\[([^\]]+)\]/g, '<span class="chord">[$1]</span>');
 }
 
-/* Render */
 function render(songText) {
   document.getElementById("song").innerHTML = colorize(songText);
 }
 
-/* Initial render */
 render(originalSong);
 
-/* Transpose a chord correctly */
 function transposeChord(chord, steps) {
   let parts = chord.split("/");
   let root = parts[0];
@@ -161,7 +149,6 @@ function transposeChord(chord, steps) {
   return newChord;
 }
 
-/* Main transpose */
 function transpose(step) {
   transposeSteps += step;
 
