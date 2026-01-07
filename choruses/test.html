@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+"<!DOCTYPE html>
+<html lang=""en"">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Song Title | song-chords</title>
-
-<style>
+<meta charset=""UTF-8"">
+<meta name=""viewport"" content=""width=device-width, initial-scale=1.0""><title>1. Abba Father| song-chords</title><style>
 body {
   background: #ffffff;
   color: #111;
@@ -45,34 +41,38 @@ button {
 </style>
 </head>
 
-<body>
-
-<h2>Song Number. Song Title</h2>
-
-<div>
+<body><h2>1. Abba Father</h2><div>
   Original Key: <b>KEY</b><br>
-  <span id="transposeKey"></span>
+  <span id=""transposeKey""></span>
 </div>
 
-<button onclick="transpose(-1)">–</button>
-<button onclick="transpose(1)">+</button>
-
-<pre id="song">
-PUT CHORD LINE HERE
-PUT LYRIC LINE HERE
-</pre>
-
-<div class="footer-nav">
-  <a href="../choruses/index.html">Back to Choruses</a> |
-  <a href="https://sites.google.com/view/song-chords">Home</a>
+<button onclick=""transpose(-1)"">–</button>
+<button onclick=""transpose(1)"">+</button><pre id=""song"">
+Bb     Cm     F         Bb
+Abba Father let me be 
+Eb             F        Bb
+Yours and yours alone
+Bb        Cm       F     Bb
+May my will for ever be
+Eb     F               Bb
+Ever more your own
+D        Gm      D             Gm    Eb     Cm     F4    F
+Never let my heart grow cold  Never let me go
+Bb     Cm      F         Bb
+Abba Father, let me be
+Eb              F        Bb
+Yours and yours alone.</pre>
+<div class=""footer-nav"">
+  <a href=""../choruses/index.html"">Back to Choruses</a> |
+  <a href=""https://sites.google.com/view/song-chords"">Home</a>
 </div>
 
 <script>
-const NOTES = ["C","C#","D","Eb","E","F","F#","G","Ab","A","Bb","B"];
-const ORIGINAL_KEY = "KEY";
+const NOTES = [""C"",""C#"",""D"",""Eb"",""E"",""F"",""F#"",""G"",""Ab"",""A"",""Bb"",""B""];
+const ORIGINAL_KEY = ""KEY"";
 const originalIndex = NOTES.indexOf(ORIGINAL_KEY);
 
-const rawText = document.getElementById("song").innerText;
+const rawText = document.getElementById(""song"").innerText;
 let transposeSteps = 0;
 
 function isChord(token) {
@@ -80,45 +80,45 @@ function isChord(token) {
 }
 
 function process(text, steps) {
-  return text.split("\n").map(line => {
+  return text.split(""\n"").map(line => {
     const tokens = line.trim().split(/\s+/);
     const isChordLine = tokens.length && tokens.every(t => isChord(t));
 
     if (!isChordLine) return line;
 
     return tokens.map(ch => {
-      let root = ch.split("/")[0];
-      let bass = ch.includes("/") ? ch.split("/")[1] : null;
+      let root = ch.split(""/"")[0];
+      let bass = ch.includes(""/"") ? ch.split(""/"")[1] : null;
 
       let match = root.match(/^([A-G])(b|#)?(.*)$/);
       if (!match) return ch;
 
-      let note = match[1] + (match[2] || "");
-      let suffix = match[3] || "";
+      let note = match[1] + (match[2] || """");
+      let suffix = match[3] || """";
 
       let idx = NOTES.indexOf(note);
       if (idx === -1) return ch;
 
       let newNote = NOTES[(idx + steps + 12) % 12];
-      let out = `<span class="chord">${newNote}${suffix}</span>`;
+      let out = `<span class=""chord"">${newNote}${suffix}</span>`;
 
       if (bass) {
         let bIdx = NOTES.indexOf(bass);
         if (bIdx !== -1) {
-          out += "/" + NOTES[(bIdx + steps + 12) % 12];
+          out += ""/"" + NOTES[(bIdx + steps + 12) % 12];
         }
       }
       return out;
-    }).join("    ");
-  }).join("\n");
+    }).join(""    "");
+  }).join(""\n"");
 }
 
 function render() {
-  document.getElementById("song").innerHTML = process(rawText, transposeSteps);
+  document.getElementById(""song"").innerHTML = process(rawText, transposeSteps);
 
-  document.getElementById("transposeKey").innerText =
-    transposeSteps === 0 ? "" :
-    "Transpose Key: " + NOTES[(originalIndex + transposeSteps + 12) % 12];
+  document.getElementById(""transposeKey"").innerText =
+    transposeSteps === 0 ? """" :
+    ""Transpose Key: "" + NOTES[(originalIndex + transposeSteps + 12) % 12];
 }
 
 function transpose(step) {
@@ -130,4 +130,5 @@ render();
 </script>
 
 </body>
-</html>
+</html>"
+	
