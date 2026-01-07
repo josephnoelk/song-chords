@@ -15,6 +15,8 @@ html, body {
 }
 
 body {
+  background: #ffffff;
+  color: #111111;
   font-family: monospace;
   font-size: 16px;
   line-height: 1.6;
@@ -70,7 +72,7 @@ pre {
 <div class="song-title">9. All Hail the Lamb</div>
 
 <div class="key-line">
-  Original Key: <strong>F</strong>
+  Original Key: <strong>F</strong><br>
   <span id="transposeKey"></span>
 </div>
 
@@ -78,21 +80,15 @@ pre {
 <button onclick="transpose(1)">+</button>
 
 <pre id="song">
-[F] [C]      [F]
-All hail the Lamb,
-[C]          [F]
-Enthroned on high;
+[F]All [C]hail the [F]Lamb,
+[C]Enthroned on [F]high;
 
-[C]             [F] [Bb][Gm] [C4] [C]
-His praise shall be our battle cry.
+[C]His praise shall[F] be [Bb]our [Gm]battle[C4] cry[C].
 
-[C]       [F]
-He reigns victorious,
-        [Dm]
-Forever glorious,
+[C]He reigns vic[F]torious,
+Forever [Dm]glorious,
 
-            [Bb]  [C][C7]    [F]
-His name is Jesus, He is the Lord.
+His name is [Bb]Jesus, [C]He [C7]is the [F]Lord.
 </pre>
 
 <div class="footer-nav">
@@ -101,7 +97,9 @@ His name is Jesus, He is the Lord.
 </div>
 
 <script>
+/* Locked chromatic order */
 const NOTES = ["C","C#","D","Eb","E","F","F#","G","Ab","A","Bb","B"];
+
 const ORIGINAL_KEY = "F";
 const originalIndex = NOTES.indexOf(ORIGINAL_KEY);
 const originalSong = document.getElementById("song").innerText;
@@ -156,7 +154,7 @@ function transpose(step) {
   let currentKey = NOTES[currentIndex];
 
   document.getElementById("transposeKey").innerText =
-    transposeSteps === 0 ? "" : "    Transpose Key: " + currentKey;
+    transposeSteps === 0 ? "" : "Transpose Key: " + currentKey;
 
   render(song);
 }
